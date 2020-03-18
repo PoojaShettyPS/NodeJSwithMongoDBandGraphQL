@@ -1,11 +1,10 @@
 let config = {    
-    uri: "mongodb://127.0.0.1:27017/auth_api",
+    uri: "mongodb://192.168.0.8:27017/MeetingDB",
     options: {
-        useMongoClient: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }
-}
-
-
- 
+} 
 
 module.exports = config
