@@ -7,14 +7,14 @@ module.exports = function (mongoose) {
             type: String
         },
         meetingDate: {
-            type: Date
+            type: String
         },
         fromTime: {
-            type: Date
+            type: String
         },
         toTime:
         {
-            type: Date
+            type: String
         },
         meetingAgenda: {
             type: String
@@ -29,7 +29,7 @@ module.exports = function (mongoose) {
         },
         deleted: {
             type: Boolean,
-            type: false
+            default: false
         }
     });
     return mongoose.model('meeting', meetingSchema);

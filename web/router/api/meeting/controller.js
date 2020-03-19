@@ -5,9 +5,9 @@ const path = require('path'),
 
 let Meeting = function () {
     this.createMeeting = (data) => {
-        let meetingData = new meetingModel(data);
-        meetingData.save();
-        return true;
+            let meetingData = new meetingModel(data);
+            meetingData.save();
+            return true;
     }
 }
 
