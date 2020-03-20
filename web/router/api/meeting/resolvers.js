@@ -15,7 +15,7 @@ const resolvers = {
                 return error.message;
             });
         },
-        getmeetingsbytime: async(root, args, context, info) => {
+        getmeetingsbytime: async(root, args, context, info) => {    
             console.log(new Date(args.fromTime));
             console.log(args.fromTime);
             console.log(new Date(args.toTime));
@@ -23,13 +23,15 @@ const resolvers = {
             const toMeetingTime = new Date(args.toTime);
             return await meetingModel.aggregate([{  
                 $match : {      
-                       $and : [{
+                       $or : [{
                            fromTime : {
-                               $gte : fromMeetingTime
+                               $gte : fromMeetingTime,
+                               $lte : toMeetingTime,
                            }},
                            {
                                toTime : {
-                                   $lte : toMeetingTime
+                                   $lte : toMeetingTime,
+                                   $gte : fromMeetingTime 
                                }
                            }]
                         }

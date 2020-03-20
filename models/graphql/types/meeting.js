@@ -26,10 +26,10 @@ const { ApolloServer, gql } = require('apollo-server'),
         updateMeeting(_id: String,userName: String,meetingRoom: String,meetingDate: String,fromTime: String,toTime: String, meetingAgenda: String):String
         createMeeting( userName: String,meetingRoom: String,meetingDate: String,fromTime: String,toTime: String,meetingAgenda: String):String
         deleteMeeting(_id: String):String
-    }
+        }
 
     input meetingFilter {
-        searchText: String
+          searchText: String
     }
 `;
 
