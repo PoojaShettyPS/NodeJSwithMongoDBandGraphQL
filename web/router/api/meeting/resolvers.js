@@ -1,4 +1,4 @@
-const path = require('path'),
+    const path = require('path'),
     meetingModel = require(path.resolve('.') + '/models/mongodb').meeting;
 
 const resolvers = {
@@ -8,6 +8,32 @@ const resolvers = {
             return await meetingModel.findOne({
                 _id: args._id,
             }).then((result) => {
+                console.log(result);
+                return result;
+            }).catch((error) => {
+                console.log(error);
+                return error.message;
+            });
+        },
+        getmeetingsbytime: async(root, args, context, info) => {
+            console.log(new Date(args.fromTime));
+            console.log(args.fromTime);
+            console.log(new Date(args.toTime));
+            const fromMeetingTime = new Date(args.fromTime);
+            const toMeetingTime = new Date(args.toTime);
+            return await meetingModel.aggregate([{  
+                $match : {      
+                       $and : [{
+                           fromTime : {
+                               $gte : fromMeetingTime
+                           }},
+                           {
+                               toTime : {
+                                   $lte : toMeetingTime
+                               }
+                           }]
+                        }
+                       }]).then((result) => {
                 console.log(result);
                 return result;
             }).catch((error) => {

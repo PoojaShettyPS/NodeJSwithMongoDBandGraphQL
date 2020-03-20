@@ -1,6 +1,7 @@
-const { gql } = require('apollo-server');
 
-typeDefs = gql`
+
+const { ApolloServer, gql } = require('apollo-server'),
+ typeDefs = gql`
     type Meeting {
         _id : String,
         userName: String,
@@ -18,6 +19,7 @@ typeDefs = gql`
         meetings: [Meeting],
         listMeetings(filter: meetingFilter): [Meeting]
         getsinglemeeting(_id: String): Meeting
+        getmeetingsbytime(fromTime: String, toTime : String): Meeting
     }
 
     type Mutation {
