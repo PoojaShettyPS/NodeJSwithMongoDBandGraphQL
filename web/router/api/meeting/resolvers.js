@@ -85,12 +85,6 @@ const resolvers = {
                 });
             }
         }
-<<<<<<< HEAD
     }
 };
 module.exports = resolvers;
-=======
-    };
-
-    module.exports = resolvers;
->>>>>>> 6d99588644d94728180640b57b84eb82c10790d6
