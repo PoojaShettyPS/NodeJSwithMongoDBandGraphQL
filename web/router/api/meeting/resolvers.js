@@ -16,19 +16,19 @@ const resolvers = {
             });
         },
         getmeetingsbytime: async (root, args, context, info) => {
-            const fromMeetingTime = new Date(args.fromTime);
-            const toMeetingTime = new Date(args.toTime);
+            const fromMeetingTime = new Date(args.fromDateTime);
+            const toMeetingTime = new Date(args.toDateTime);
             return await meetingModel.aggregate([{
                 $match: {
                     deleted : false,
                     $or: [{
-                        fromTime: {
+                        fromDateTime: {
                             $gte: fromMeetingTime,
                             $lte: toMeetingTime
                         }
                     },
                     {
-                        toTime: {
+                        toDateTime: {
                             $lte: toMeetingTime,
                             $gte: fromMeetingTime
                         }
@@ -55,6 +55,7 @@ const resolvers = {
                 return courses;
             }
         },
+    },
         Mutation: {
             createMeeting: (root, args, context, info) => {
                 console.log(args);
@@ -85,6 +86,6 @@ const resolvers = {
                 });
             }
         }
-    }
 };
+
 module.exports = resolvers;

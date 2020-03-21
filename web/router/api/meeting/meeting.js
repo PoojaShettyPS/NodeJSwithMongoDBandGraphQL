@@ -11,5 +11,4 @@ let Meeting = function () {
         });
     }
 }
-
 module.exports = new Meeting();

@@ -19,7 +19,7 @@ const { gql } = require('apollo-server'),
         meetings: [Meeting],
         listMeetings(filter: meetingFilter): [Meeting]
         getsinglemeeting(_id: String): Meeting
-        getmeetingsbytime(fromTime: String, toTime : String): Meeting
+        getmeetingsbytime(fromDateTime: String, toDateTime : String): Meeting
     }
 
     type Mutation {
