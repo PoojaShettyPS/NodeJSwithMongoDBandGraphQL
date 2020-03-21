@@ -54,37 +54,43 @@ const resolvers = {
             } else {
                 return courses;
             }
-        }
-    },
-
-    Mutation: {
-        createMeeting: (root, args, context, info) => {
-            let meetingData = new meetingModel(args);
-            meetingData.save();
-            return true;
         },
-        updateMeeting: (root, args, context, info) => {
-            console.log(args);
-            meetingModel.update({
-                _id: args._id
-            }, {
-                $set: args
-            }).then((result) => {
-                return result;
-            }).catch((error) => {
-                return error.message;
-            });
-        },
-        deleteMeeting: (root, args, context, info) => {
-            console.log(args);
-            meetingModel.deleteOne({
-                _id: args._id
-            }).then((result) => {
-                return result;
-            }).catch((error) => {
-                return error.message;
-            });
+        Mutation: {
+            createMeeting: (root, args, context, info) => {
+                console.log(args);
+                let meetingData = new meetingModel(args);
+                meetingData.save();
+                return true;
+            },
+            updateMeeting: (root, args, context, info) => {
+                console.log(args);
+                meetingModel.update({
+                    _id: args._id
+                }, {
+                    $set: args
+                }).then((result) => {
+                    return result;
+                }).catch((error) => {
+                    return error.message;
+                });
+            },
+            deleteMeeting: (root, args, context, info) => {
+                console.log(args);
+                meetingModel.deleteOne({
+                    _id: args._id
+                }).then((result) => {
+                    return result;
+                }).catch((error) => {
+                    return error.message;
+                });
+            }
         }
+<<<<<<< HEAD
     }
 };
 module.exports = resolvers;
+=======
+    };
+
+    module.exports = resolvers;
+>>>>>>> 6d99588644d94728180640b57b84eb82c10790d6

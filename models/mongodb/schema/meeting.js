@@ -9,12 +9,17 @@ module.exports = function (mongoose) {
         meetingDate: {
             type: Date
         },
-        fromTime: {
+        fromDateTime: {
             type: Date
         },
-        toTime:
-        {
+        fromTime: {
+            type: String
+        },
+        toDateTime: {
             type: Date
+        },
+        toTime: {
+            type: String
         },
         meetingAgenda: {
             type: String

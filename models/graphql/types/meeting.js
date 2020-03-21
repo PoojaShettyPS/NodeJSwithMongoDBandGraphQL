@@ -1,12 +1,12 @@
-
-
-const { ApolloServer, gql } = require('apollo-server'),
- typeDefs = gql`
+const { gql } = require('apollo-server'),
+    typeDefs = gql `
     type Meeting {
         _id : String,
         userName: String,
         meetingRoom: String,
         meetingDate: String,
+        fromDateTime: String,
+        toDateTime: String,
         fromTime: String,
         toTime: String,
         meetingAgenda: String,
@@ -23,10 +23,10 @@ const { ApolloServer, gql } = require('apollo-server'),
     }
 
     type Mutation {
-        updateMeeting(_id: String,userName: String,meetingRoom: String,meetingDate: String,fromTime: String,toTime: String, meetingAgenda: String):String
-        createMeeting( userName: String,meetingRoom: String,meetingDate: String,fromTime: String,toTime: String,meetingAgenda: String):String
+        updateMeeting(_id: String,userName: String,meetingRoom: String,meetingDate: String,fromTime: String,toTime: String,fromDateTime: String,toDateTime: String, meetingAgenda: String):String
+        createMeeting( userName: String,meetingRoom: String,meetingDate: String,fromTime: String,toTime: String,fromDateTime: String,toDateTime: String,meetingAgenda: String):String
         deleteMeeting(_id: String):String
-        }
+    }
 
     input meetingFilter {
           searchText: String
