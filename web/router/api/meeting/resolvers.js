@@ -1,4 +1,4 @@
-    const path = require('path'),
+const path = require('path'),
     meetingModel = require(path.resolve('.') + '/models/mongodb').meeting;
 
 const resolvers = {
@@ -15,27 +15,26 @@ const resolvers = {
                 return error.message;
             });
         },
-        getmeetingsbytime: async(root, args, context, info) => {    
-            console.log(new Date(args.fromTime));
-            console.log(args.fromTime);
-            console.log(new Date(args.toTime));
+        getmeetingsbytime: async (root, args, context, info) => {
             const fromMeetingTime = new Date(args.fromTime);
             const toMeetingTime = new Date(args.toTime);
-            return await meetingModel.aggregate([{  
-                $match : {      
-                       $or : [{
-                           fromTime : {
-                               $gte : fromMeetingTime,
-                               $lte : toMeetingTime,
-                           }},
-                           {
-                               toTime : {
-                                   $lte : toMeetingTime,
-                                   $gte : fromMeetingTime 
-                               }
-                           }]
+            return await meetingModel.aggregate([{
+                $match: {
+                    deleted : false,
+                    $or: [{
+                        fromTime: {
+                            $gte: fromMeetingTime,
+                            $lte: toMeetingTime
                         }
-                       }]).then((result) => {
+                    },
+                    {
+                        toTime: {
+                            $lte: toMeetingTime,
+                            $gte: fromMeetingTime
+                        }
+                    }]
+                }
+            }]).then((result) => {
                 console.log(result);
                 return result;
             }).catch((error) => {
@@ -88,5 +87,4 @@ const resolvers = {
         }
     }
 };
-
 module.exports = resolvers;
