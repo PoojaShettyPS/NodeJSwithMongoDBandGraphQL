@@ -1,5 +1,5 @@
 let config = {    
-    uri: "mongodb://192.168.43.52:27017/MeetingDB",
+    uri: "mongodb://192.168.0.153:27017/MeetingDB",
     options: {
         useNewUrlParser: true,
         useUnifiedTopology: true,

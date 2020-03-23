@@ -43,7 +43,7 @@ const resolvers = {
             });
         },
         meetings: async (root, { }) => {
-            return await meetingModel.find({});
+            return await meetingModel.find({}).lean(true);
         },
         listMeetings: async (root, { filter }) => {
             console.log('filter------->', JSON.stringify(filter));
