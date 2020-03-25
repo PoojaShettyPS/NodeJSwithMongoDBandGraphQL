@@ -16,10 +16,10 @@ const { gql } = require('apollo-server'),
     }
 
     type Query {
-        meetings: [Meeting],
+        meetings(filter : meetingFilter): [Meeting],
         listMeetings(filter: meetingFilter): [Meeting]
         getsinglemeeting(_id: String): Meeting
-        getmeetingsbytime(fromDateTime: String, toDateTime : String): Meeting
+        getmeetingsbytime(fromDateTime: String, toDateTime : String): [Meeting]
     }
 
     type Mutation {
@@ -30,6 +30,7 @@ const { gql } = require('apollo-server'),
 
     input meetingFilter {
           searchText: String
+          roomName : String
     }
 `;
 

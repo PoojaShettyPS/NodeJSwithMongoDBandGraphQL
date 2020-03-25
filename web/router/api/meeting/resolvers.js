@@ -20,7 +20,7 @@ const resolvers = {
             const toMeetingTime = new Date(args.toDateTime);
             return await meetingModel.aggregate([{
                 $match: {
-                    deleted : false,
+                    deleted: false,
                     $or: [{
                         fromDateTime: {
                             $gte: fromMeetingTime,
@@ -42,8 +42,13 @@ const resolvers = {
                 return error.message;
             });
         },
-        meetings: async (root, { }) => {
-            return await meetingModel.find({}).lean(true);
+        meetings: async (root, { filter }) => {
+            if (filter) {
+                console.log(JSON.stringify(filter));
+                return await meetingModel.find({ "meetingRoom": filter.roomName }).lean(true);
+            } else {
+                return await meetingModel.find({}).lean(true);
+            }
         },
         listMeetings: async (root, { filter }) => {
             console.log('filter------->', JSON.stringify(filter));
@@ -56,36 +61,36 @@ const resolvers = {
             }
         },
     },
-        Mutation: {
-            createMeeting: (root, args, context, info) => {
-                console.log(args);
-                let meetingData = new meetingModel(args);
-                meetingData.save();
-                return true;
-            },
-            updateMeeting: (root, args, context, info) => {
-                console.log(args);
-                meetingModel.update({
-                    _id: args._id
-                }, {
-                    $set: args
-                }).then((result) => {
-                    return result;
-                }).catch((error) => {
-                    return error.message;
-                });
-            },
-            deleteMeeting: (root, args, context, info) => {
-                console.log(args);
-                meetingModel.deleteOne({
-                    _id: args._id
-                }).then((result) => {
-                    return result;
-                }).catch((error) => {
-                    return error.message;
-                });
-            }
+    Mutation: {
+        createMeeting: (root, args, context, info) => {
+            console.log(args);
+            let meetingData = new meetingModel(args);
+            meetingData.save();
+            return true;
+        },
+        updateMeeting: (root, args, context, info) => {
+            console.log(args);
+            meetingModel.update({
+                _id: args._id
+            }, {
+                $set: args
+            }).then((result) => {
+                return result;
+            }).catch((error) => {
+                return error.message;
+            });
+        },
+        deleteMeeting: (root, args, context, info) => {
+            console.log(args);
+            meetingModel.deleteOne({
+                _id: args._id
+            }).then((result) => {
+                return result;
+            }).catch((error) => {
+                return error.message;
+            });
         }
+    }
 };
 
 module.exports = resolvers;
